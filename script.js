@@ -17,4 +17,7 @@ function addBook(event) {
     localStorage.setItem("books", JSON.stringify(books));
 
     alert("Book added successfully!")
+    document.getElementById("BookForm").reset();
+
 }
+
