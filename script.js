@@ -21,3 +21,9 @@ function addBook(event) {
 
 }
 
+function displayBooks() {
+    const books = JSON.parse(localStorage.getItem("books")) || [];
+    const bookList = document.getElementById("BookList");
+
+    if(!bookList) return;
+}
