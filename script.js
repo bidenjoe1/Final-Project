@@ -7,7 +7,7 @@ function addBook(event) {
 
     let title = document.getElementById("title").value;
     let author = document.getElementById("author").value;
-    let summary = document.getElementById("summary").value;
+    let summary = document.getElementById("AboutBook").value;
     let isRead = document.getElementById("isRead").checked;
 
     if (title === "" || author === "" || summary === "") {
@@ -57,4 +57,7 @@ function deleteBook(index) {
     }
 }
 
-
+const bookForm = document.getElementById("BookForm");
+if(bookForm) {
+    bookForm.addEventListener("submit", addBook);
+}
