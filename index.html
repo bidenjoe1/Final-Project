@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Book Vault</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Bookvault</h1>
+        <h1>Bookvault 📚</h1>
         <nav>
             <a href="index.html">Home</a>
             <a href="addbook.html">Add Book</a>
@@ -19,7 +20,8 @@
         <h2>Welcome to Bookvault</h2>
         <p>Your personal collection manager</p>
 
-        <input type="text" id="SearchBar" placeholder="Search books">
+        <input type="text" id="SearchBar" placeholder="Search books" onkeyup="searchBooks()">
+        <div id="searchResults"></div>
     </main>
 
     <script src="script.js"></script>

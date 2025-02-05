@@ -29,7 +29,7 @@ function displayBooks() {
     const books = JSON.parse(localStorage.getItem("books")) || [];
     const bookList = document.getElementById("BookList");
 
-    if(!bookList) return;
+    if(!BookList) return;
 
     bookList.innerHTML = "";
     books.forEach((book, index) => {
@@ -39,7 +39,8 @@ function displayBooks() {
         bookItem.innerHTML = `
             <h3>${book.title}</h3>
             <p><strong>Author:</strong> ${book.author}</p>
-            <p><strong>Status:</strong> ${book.isRead ? "Read" : "Unread"}</p>
+            <p><strong>Summary:</strong> ${book.summary}</p>
+            <p><strong>Status:</strong> ${book.isRead ? "Read ✅" : "Unread ❌"}</p>
             <button onclick="deleteBook(${index})">Delete</button>
         `;
 
@@ -57,7 +58,49 @@ function deleteBook(index) {
     }
 }
 
+function searchBooks() {
+    const query = document.getElementById("SearchBar").value.trim().toLowerCase();
+    const books = JSON.parse(localStorage.getItem("books")) || [];
+    const searchResults = document.getElementById("searchResults");
+
+    searchResults.innerHTML = ""; 
+
+    
+    const filteredBooks = books.filter(book => {
+        let isMatch = query.length > 0 && (
+            (book.title?.toLowerCase() || "").includes(query) ||
+            (book.author?.toLowerCase() || "").includes(query) ||
+            (book.summary?.toLowerCase() || "").includes(query)
+        );
+        
+        console.log(`Checking: ${book.title} | Match: ${isMatch}`); 
+        return isMatch;
+    });
+
+    console.log("Filtered Books:", filteredBooks); 
+
+    if (filteredBooks.length === 0) {
+        searchResults.innerHTML = "<p>No books found.</p>";
+    } else {
+        filteredBooks.forEach(book => {
+            const bookItem = document.createElement("div");
+            bookItem.classList.add("book-item");
+            bookItem.innerHTML = `
+                <h3>${book.title}</h3>
+                <p><strong>Author:</strong> ${book.author}</p>
+                <p><strong>Summary:</strong> ${book.summary}</p>
+                <p><strong>Status:</strong> ${book.isRead ? "Read ✅" : "Unread ❌"}</p>
+            `;
+            searchResults.appendChild(bookItem);
+        });
+    }
+}
+
+
+
+
 const bookForm = document.getElementById("BookForm");
 if(bookForm) {
     bookForm.addEventListener("submit", addBook);
 }
+
