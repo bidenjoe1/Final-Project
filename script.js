@@ -47,3 +47,14 @@ function displayBooks() {
     });
 
 }
+
+function deleteBook(index) {
+    var books = JSON.parse(localStorage.getItem("books")) || [];
+    if (confirm("Are you sure you want to delete this book?")) {
+        books.splice(index, 1);
+        localStorage.setItem("books", JSON.stringify(books));
+        displayBooks();
+    }
+}
+
+
