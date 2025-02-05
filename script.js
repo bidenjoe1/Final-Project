@@ -26,4 +26,20 @@ function displayBooks() {
     const bookList = document.getElementById("BookList");
 
     if(!bookList) return;
+
+    bookList.innerHTML = "";
+    books.forEach((book, index) => {
+        let bookItem = document.createElement("div");
+        bookItem.classList.add("book-item");
+
+        bookItem.innerHTML = `
+            <h3>${book.title}</h3>
+            <p><strong>Author:</strong> ${book.author}</p>
+            <p><strong>Status:</strong> ${book.isRead ? "Read" : "Unread"}</p>
+            <button onclick="deleteBook(${index})">Delete</button>
+        `;
+
+        bookList.appendChild(bookItem);
+    });
+
 }
